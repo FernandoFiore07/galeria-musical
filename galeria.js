@@ -1,7 +1,26 @@
 //Se define la funcion llamada agregarBotones
 // Dentro de la funcio se seleccionan todos los elementos con la clase .album
+
+const input = document.querySelector(".search")
+const titulo3 = document.querySelectorAll("h3");
+const albums = document.querySelectorAll(".album");
+let texto = "";
+let nombreCancion = "";
+
+function cancionBuscada() {
+    input.addEventListener("input", function () {
+        texto = input.value.toLowerCase();
+
+        titulo3.forEach((titulo, i) => {
+            nombreCancion = titulo.textContent.toLowerCase();
+
+            nombreCancion.includes(texto)? albums[i].style.display = "block": albums[i].style.display = "none"; 
+            
+        });
+    });
+}
+
 function agregarBotonesLike() {
-  const albums = document.querySelectorAll(".album");
 
   //Recorre cada uno de los a
   albums.forEach((album) => {
@@ -33,6 +52,7 @@ function agregarBotonesLike() {
     likeBtn.appendChild(icono);
     album.appendChild(likeBtn);
   });
+
 }
 
 const toggleBtn = document.getElementById("modo-toggle");
@@ -49,3 +69,4 @@ toggleBtn.addEventListener("click", () => {
 
 //Ejecutar cuando cargue la pagina
 window.onload = agregarBotonesLike;
+window.onload = cancionBuscada;
